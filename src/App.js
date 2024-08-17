@@ -5,6 +5,8 @@ import Textform from "./Components/Textform";
 
 function App() {
 
+ 
+
   const [st,setst] =useState({
     color: "black"
   })
@@ -31,7 +33,7 @@ function App() {
     <>
     <Navbar title="TextTransformX" mode={mode} toggleMode={toggleMode} st={st}/>
     <div className="container">
-    <Textform heading="Enter Your Text" mode={mode} toggleMode={toggleMode} /> 
+    <Textform heading="Enter Your Text" mode={mode} toggleMode={toggleMode} stt={st} /> 
 
     </div>
     
