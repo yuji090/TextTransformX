@@ -3,11 +3,26 @@ import About from "./Components/About";
 import Navbar from "./Components/Navbar";
 import Textform from "./Components/Textform";
 import Alert from "./Components/Alert";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  
+} from "react-router-dom";
+
 
 function App() {
   const[p,setp]=useState(false)
   const fn =()=>{
     setp(true)
+    setTimeout(()=>{
+      setp(false)
+    },3000)
+  }
+
+  const fs=(a)=>{
+    setp(true)
+    setalert(a)
     setTimeout(()=>{
       setp(false)
     },3000)
@@ -22,17 +37,17 @@ function App() {
 
   const toggleMode = ()=>{
     if(mode==='light'){
-      setalert('Dark');
+      setalert('Dark mode enabled');
       setmode('dark');
       setst({
         color: "white"
       })
       document.body.style.backgroundColor='#042743';
       fn();
-      
+     // document.title ='qk'
     }
     else{
-      setalert('Light')
+      setalert('Light mode enabled')
       setmode('light');
       setst({
         color:"#042743"
@@ -43,13 +58,16 @@ function App() {
   }
   return (
     <>
-    <Navbar title="TextTransformX" mode={mode} toggleMode={toggleMode} st={st}/>
-    {p ? <Alert m={alert} /> : null}
-    <div className="container">
-    <Textform heading="Enter Your Text" mode={mode} toggleMode={toggleMode} stt={st} /> 
-
-    </div>
-    
+      <Router>
+        <Navbar title="TextTransformX" mode={mode} toggleMode={toggleMode} st={st} />
+        {p ? <Alert m={alert}  /> : null}
+        <div className="container">
+          <Routes>
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/" element={<Textform heading="Enter Your Text" mode={mode} toggleMode={toggleMode} stt={st} fn={fs} />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
