@@ -6,19 +6,19 @@ export default function Textform(props) {
         navigator.clipboard.writeText(text)
             .then(() => {
                 console.log('Text copied to clipboard');
-                // Optionally, you can add a UI notification here.
+
             })
             .catch(err => {
                 console.error('Failed to copy text: ', err);
             });
-            {props.fn('Text Copied')}
+            props.fn('Text Copied')
 
     };
 
     const handleupclick = ()=>{
         let tex = text.toUpperCase();
         settext(tex);
-        {props.fn('Text converted to Uppercase')}
+        props.fn('Text converted to Uppercase')
 
         
     }
@@ -26,13 +26,13 @@ export default function Textform(props) {
     const handlelowclick = ()=>{
         let tex =text.toLocaleLowerCase();
         settext(tex);
-        {props.fn('Text converted to Lowercase')}
+        props.fn('Text converted to Lowercase')
     }
 
     const handleclear = ()=>{
         let tex ="";
         settext(tex);
-        {props.fn('Text Cleared')}
+        props.fn('Text Cleared')
     }
 
 
@@ -48,17 +48,19 @@ export default function Textform(props) {
         <label htmlFor="box" className="form-label">Textarea</label>
         <textarea className="form-control" value={text} onChange={handleonchange} style={{backgroundColor: props.mode==='dark'? 'grey':'white', color: props.mode==='dark'?'white':'black'}} id="box" rows="8"></textarea>
         </div>
-            <button className="btn btn-primary" onClick={handleupclick}>Convert to upper</button>
-            <button className="btn btn-primary mx-3" onClick={handlelowclick}>Convert to lower</button>
-            <button className="btn btn-primary mx-3" onClick={handleclear} >Clear text</button>
-            <button className="btn btn-primary mx-3" onClick={copyToClipboard}>Copy text</button>
+            <button className="btn btn-primary mx-3 my-1" onClick={handleupclick}>Convert to upper</button>
+            <button className="btn btn-primary mx-3 my-1" onClick={handlelowclick}>Convert to lower</button>
+            <button className="btn btn-primary mx-3 my-1" onClick={handleclear} >Clear text</button>
+            <button className="btn btn-primary mx-3 my-1" onClick={copyToClipboard}>Copy text</button>
         <div className="container my-3">
             <h1 style={props.stt}>Your Text Summary</h1>
-            <p style={props.stt}>{text.split(" ").length} words , {text.length} chracters</p>
+            <p style={props.stt}>{text.split(" ").filter((element)=>{return element.length!=0}).length} words , {text.length} chracters</p>
             <h2 style={props.stt}>Preview</h2>
             <p style={props.stt}>{text.length>0? text : 'Enter Something to preview it here'}</p>
+
         </div>
 
     </>
   )
 }
+

@@ -9,6 +9,7 @@ import {
   Route,
   
 } from "react-router-dom";
+import Nk from "./Nk";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
           <Routes>
             <Route exact path="/about" element={<About />} />
             <Route exact path="/" element={<Textform heading="Enter Your Text" mode={mode} toggleMode={toggleMode} stt={st} fn={fs} />} />
+            <Route exact path="/link" element={<Nk/>}/>
           </Routes>
         </div>
       </Router>
